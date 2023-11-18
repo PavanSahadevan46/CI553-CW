@@ -21,7 +21,6 @@ class Setup
   //  "drop table ProductList",
 //  "drop table StockList",
 
-  // Product table
   "drop table ProductTable",
   "create table ProductTable ("+
       "productNo      Char(4)," +
@@ -47,7 +46,6 @@ class Setup
 
 
   
-  //stock table
   "drop table StockTable",
   "create table StockTable ("+
       "productNo      Char(4)," +
@@ -64,7 +62,7 @@ class Setup
   "select * from StockTable, ProductTable " +
           " where StockTable.productNo = ProductTable.productNo"
 
-  // reservation table
+
  
   };
 
