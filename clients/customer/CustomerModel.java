@@ -131,9 +131,14 @@ public class CustomerModel extends Observable
   protected Basket makeBasket()
   {
     return new Basket();
+  }  //reservation function
+  
+  public void doReserve(){
+    // var reserveID = 1;
+    // int currentReservations[];
+    // int completedReservations[]; 
+   
+
   }
 }
-  //reservation function
-// public void doReserve(){
-  
-// }
+

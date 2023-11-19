@@ -39,8 +39,7 @@ public class CustomerController
   }
 
   public void doReserve(){
-    System.out.println("test1");
-    
+    model.doReserve();
   }
 
   

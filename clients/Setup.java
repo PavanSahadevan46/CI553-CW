@@ -60,8 +60,13 @@ class Setup
   "insert into StockTable values ( '0007',  01 )",
 
   "select * from StockTable, ProductTable " +
-          " where StockTable.productNo = ProductTable.productNo"
+          " where StockTable.productNo = ProductTable.productNo",
 
+  "drop table ReservationTable",
+  "create table ReservationTable ("+
+      "ReservationNumber  Char(4)," +
+      "productNo      Char(4)," +
+      "stockLevel     Integer)",
 
  
   };
