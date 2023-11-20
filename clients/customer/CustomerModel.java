@@ -9,6 +9,7 @@ import middle.StockException;
 import middle.StockReader;
 
 import javax.swing.*;
+import java.sql.*;
 import java.util.Observable;
 
 /**
@@ -131,13 +132,13 @@ public class CustomerModel extends Observable
   protected Basket makeBasket()
   {
     return new Basket();
-  }  //reservation function
-  
+  }  
+  //reservation function
   public void doReserve(){
-    // var reserveID = 1;
-    // int currentReservations[];
-    // int completedReservations[]; 
-   
+  
+
+    //use stock reader 
+  
 
   }
 }
