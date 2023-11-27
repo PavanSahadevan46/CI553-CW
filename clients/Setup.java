@@ -62,11 +62,11 @@ class Setup
   "select * from StockTable, ProductTable " +
           " where StockTable.productNo = ProductTable.productNo",
 
-  "drop table ReservationTable",
+  // "drop table ReservationTable",
   "create table ReservationTable ("+
       "ReservationNumber  Char(4)," +
       "productNo      Char(4)," +
-      "stockLevel     Integer)",
+      "stockLevel     Integer)"
 
  
   };

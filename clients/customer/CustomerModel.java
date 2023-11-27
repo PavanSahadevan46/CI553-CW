@@ -133,11 +133,17 @@ public class CustomerModel extends Observable
   {
     return new Basket();
   }  
-  //reservation function
-  public void doReserve(){
-  
 
-    //use stock reader 
+  /**
+   * Reserve 
+   * @param reservationNum The reservation number
+   * @param productNum The product number of the item
+   * @param quantity How many to be added
+   */
+  public void doReserve(String reservationNum,String productNum,String quantity){
+    // try to mirror doRStock() in backdoormodel to access database and understand how it functions
+   
+
   
 
   }

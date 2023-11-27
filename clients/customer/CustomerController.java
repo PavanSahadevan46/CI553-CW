@@ -39,7 +39,7 @@ public class CustomerController
   }
 
   public void doReserve(){
-    model.doReserve();
+    model.doReserve(null, null, null);
   }
 
   
