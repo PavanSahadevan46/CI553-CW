@@ -37,6 +37,11 @@ public class CustomerController
   {
     model.doClear();
   }
+  
+  public void doReserve()
+  {
+    model.doReserve();
+  }
 
   
 }

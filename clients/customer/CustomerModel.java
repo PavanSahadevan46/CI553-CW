@@ -6,7 +6,9 @@ import debug.DEBUG;
 import middle.MiddleFactory;
 import middle.OrderProcessing;
 import middle.StockException;
+import middle.StockReadWriter;
 import middle.StockReader;
+import middle.*;
 
 import javax.swing.*;
 import java.util.Observable;
@@ -24,6 +26,8 @@ public class CustomerModel extends Observable
   private String      pn = "";                    // Product being processed
 
   private StockReader     theStock     = null;
+  private StockReadWriter theStockRW     = null;
+
   private OrderProcessing theOrder     = null;
   private ImageIcon       thePic       = null;
 
@@ -36,6 +40,7 @@ public class CustomerModel extends Observable
     try                                          // 
     {  
       theStock = mf.makeStockReader();           // Database access
+      theStockRW = mf.makeStockReadWriter();           // Database access for read write
     } catch ( Exception e )
     {
       DEBUG.error("CustomerModel.constructor\n" +
@@ -107,6 +112,17 @@ public class CustomerModel extends Observable
     setChanged(); notifyObservers(theAction);
   }
   
+  public void doReserve()
+  {
+    int    amount  = 1;   
+    doCheck(pn);
+    try {
+      theStockRW.buyStock(pn,amount);
+    } catch (StockException e) {
+      e.printStackTrace();
+    }
+
+  }
   /**
    * Return a picture of the product
    * @return An instance of an ImageIcon
