@@ -56,5 +56,17 @@ public class RemoteMiddleFactory implements MiddleFactory
   {
     return new F_Order( theOrder_URL );
   }
+
+  @Override
+  public ReserveReader makeReserveReader() throws reserveException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'makeReserveReader'");
+  }
+
+  @Override
+  public ReserveReadWriter makeReserveReadWriter() throws reserveException {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'makeReserveReadWriter'");
+  }
 }
 

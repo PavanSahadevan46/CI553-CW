@@ -24,6 +24,9 @@ public class CustomerModel extends Observable
   private Basket      theBasket  = null;          // Bought items
 
   private String      pn = "";                    // Product being processed
+  private Product      pr = null;                    // Product being processed gang shit
+ 
+  private ReserveReadWriter theReserve = null;
 
   private StockReader     theStock     = null;
   private StockReadWriter theStockRW     = null;
@@ -37,10 +40,11 @@ public class CustomerModel extends Observable
    */
   public CustomerModel(MiddleFactory mf)
   {
-    try                                          // 
+    try                                           
     {  
       theStock = mf.makeStockReader();           // Database access
       theStockRW = mf.makeStockReadWriter();           // Database access for read write
+      theReserve = mf.makeReserveReadWriter();
     } catch ( Exception e )
     {
       DEBUG.error("CustomerModel.constructor\n" +
@@ -115,10 +119,30 @@ public class CustomerModel extends Observable
   public void doReserve()
   {
     int    amount  = 1;   
+    String theAction = "";
+
+
     doCheck(pn);
     try {
       theStockRW.buyStock(pn,amount);
     } catch (StockException e) {
+      System.out.println("Error whilst checking item's stock:" + e);
+      e.printStackTrace();
+    }
+    try {
+      
+      theReserve.reserveItem(pn,amount);
+
+      // tell user their reservation id number in the basket or just a popup window
+
+
+
+
+
+
+
+    } catch (reserveException e) {
+      System.out.println("Error whilst reserving item: " + e);
       e.printStackTrace();
     }
 

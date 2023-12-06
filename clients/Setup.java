@@ -16,10 +16,10 @@ class Setup
 {
   private static String[] sqlStatements = {
 
-//  " SQL code to set up database tables",
+  //  " SQL code to set up database tables",
 
-//  "drop table ProductList",
-//  "drop table StockList",
+  //  "drop table ProductList",
+  //  "drop table StockList",
 
 
   "drop table ProductTable",
@@ -58,9 +58,19 @@ class Setup
   "insert into StockTable values ( '0005',  17 )",
   "insert into StockTable values ( '0006',  15 )",
   "insert into StockTable values ( '0007',  01 )",
+  
+  "drop table ReserveTable",
+  "create table ReserveTable ("+
+      "reserveID  Integer NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),"+
+      "productNo      Char(4)," +
+      "Quantity      Char(3))",
+      // "FOREIGN KEY (productNo) REFERENCES  ProductTable(productNo))",
 
+   
   "select * from StockTable, ProductTable " +
-          " where StockTable.productNo = ProductTable.productNo"
+          " where StockTable.productNo = ProductTable.productNo",
+
+//  "select * from ReserveTable",      
 
  };
 

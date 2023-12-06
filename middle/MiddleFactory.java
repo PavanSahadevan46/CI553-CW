@@ -37,5 +37,12 @@ public interface MiddleFactory
    */
   public OrderProcessing makeOrderProcessing() throws OrderException;
 
+
+  public ReserveReader makeReserveReader() throws  reserveException;
+  
+  public ReserveReadWriter makeReserveReadWriter() throws  reserveException;
+
+
+
 }
 

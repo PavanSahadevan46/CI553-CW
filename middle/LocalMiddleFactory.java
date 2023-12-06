@@ -7,6 +7,8 @@ package middle;
 
 import dbAccess.StockR;
 import dbAccess.StockRW;
+import dbAccess.reserveR;
+import dbAccess.reserveRW;
 import orders.Order;
 
 
@@ -22,6 +24,8 @@ public class LocalMiddleFactory implements MiddleFactory
   private static StockR  aStockR  = null;
   private static StockRW aStockRW = null;
   private static Order   aOrder   = null;
+  private static reserveR aReserveR = null;
+  private static reserveRW aReserveRW = null;
   
   /**
    * Return an object to access the database for read only access.
@@ -58,5 +62,22 @@ public class LocalMiddleFactory implements MiddleFactory
       aOrder = new Order();
     return aOrder;
   }
+
+  public ReserveReader makeReserveReader() throws reserveException
+  {
+    if ( aReserveR == null )
+      aReserveR= new reserveR();
+    return aReserveR;
+  }
+  
+  public ReserveReadWriter makeReserveReadWriter() throws reserveException
+  {
+    if ( aReserveRW == null )
+      aReserveRW= new reserveRW();
+    return aReserveRW;
+  }
+
+ 
+  
 }
 
