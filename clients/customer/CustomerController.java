@@ -1,5 +1,7 @@
 package clients.customer;
 
+import middle.StockException;
+
 /**
  * The Customer Controller
  * @author M A Smith (c) June 2014

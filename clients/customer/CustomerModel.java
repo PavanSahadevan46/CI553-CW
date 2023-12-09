@@ -11,6 +11,8 @@ import middle.StockReader;
 import middle.*;
 
 import javax.swing.*;
+
+import java.sql.SQLException;
 import java.util.Observable;
 
 /**
@@ -24,7 +26,7 @@ public class CustomerModel extends Observable
   private Basket      theBasket  = null;          // Bought items
 
   private String      pn = "";                    // Product being processed
-  private Product      pr = null;                    // Product being processed gang shit
+  private Product      pr = null;                    // Product being processed 
  
   private ReserveReadWriter theReserve = null;
 
@@ -125,23 +127,13 @@ public class CustomerModel extends Observable
     doCheck(pn);
     try {
       theStockRW.buyStock(pn,amount);
-    } catch (StockException e) {
-      System.out.println("Error whilst checking item's stock:" + e);
-      e.printStackTrace();
-    }
-    try {
-      
       theReserve.reserveItem(pn,amount);
-
-      // tell user their reservation id number in the basket or just a popup window
-
+      theReserve.getReserveID();
 
 
 
-
-
-
-    } catch (reserveException e) {
+      
+    } catch (StockException|SQLException|reserveException e) {
       System.out.println("Error whilst reserving item: " + e);
       e.printStackTrace();
     }
