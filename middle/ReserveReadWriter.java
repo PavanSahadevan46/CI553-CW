@@ -12,4 +12,5 @@ import dbAccess.reserveRW;
 public interface ReserveReadWriter extends ReserveReader {
 
     void reserveItem(String pNum, int amount) throws reserveException;
+    int getGlobalReserveID();
 }

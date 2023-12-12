@@ -91,11 +91,11 @@ public class reserveR implements ReserveReader
     }
   }
 
-  
 
+   
+  int globalReserveID;
   public ResultSet getReserveID() throws SQLException  {
-  
-    int globalReserveID;
+    
     try {
       ResultSet rs =getStatementObject().executeQuery(
         "SELECT T1.reserveID FROM ReserveTable T1 JOIN ReserveTable T2 ON T1.reserveID = T2.reserveID + 1");
@@ -112,7 +112,11 @@ public class reserveR implements ReserveReader
     return null;
   }
 
+  public int getGlobalReserveID(){
+    return globalReserveID;
+  };
 
+  
   // TODO create a getter setter to access the reserveid in customermodel
 
 

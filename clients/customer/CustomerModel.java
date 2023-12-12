@@ -3,11 +3,6 @@ package clients.customer;
 import catalogue.Basket;
 import catalogue.Product;
 import debug.DEBUG;
-import middle.MiddleFactory;
-import middle.OrderProcessing;
-import middle.StockException;
-import middle.StockReadWriter;
-import middle.StockReader;
 import middle.*;
 
 import javax.swing.*;
@@ -126,12 +121,14 @@ public class CustomerModel extends Observable
 
     doCheck(pn);
     try {
+      if ( theStock.exists( pn ) ){
+      theBasket.clear(); 
       theStockRW.buyStock(pn,amount);
       theReserve.reserveItem(pn,amount);
       theReserve.getReserveID();
-
-
-
+      theAction = String.valueOf(theReserve.getGlobalReserveID()); 
+      };
+    
       
     } catch (StockException|SQLException|reserveException e) {
       System.out.println("Error whilst reserving item: " + e);
