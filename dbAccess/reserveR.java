@@ -116,18 +116,5 @@ public class reserveR implements ReserveReader
     return globalReserveID;
   };
 
-  
-  // TODO create a getter setter to access the reserveid in customermodel
 
-
-
-
-
-
-
-
-
-
-
-    
 }

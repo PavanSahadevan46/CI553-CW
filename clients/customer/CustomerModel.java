@@ -117,17 +117,19 @@ public class CustomerModel extends Observable
   {
     int    amount  = 1;   
     String theAction = "";
-
-
-    doCheck(pn);
-    try {
-      if ( theStock.exists( pn ) ){
-      theBasket.clear(); 
+    try { 
+      if ( theStock.exists( pn ) )
+      {
+      Product pr = theStock.getDetails( pn );
+      if ( pr.getQuantity() >= amount ) 
+      {
       theStockRW.buyStock(pn,amount);
       theReserve.reserveItem(pn,amount);
       theReserve.getReserveID();
-      theAction = String.valueOf(theReserve.getGlobalReserveID()); 
+      theAction = ("Your Reservation id is: " + String.valueOf(theReserve.getGlobalReserveID())); 
+      setChanged(); notifyObservers(theAction);
       };
+    };
     
       
     } catch (StockException|SQLException|reserveException e) {

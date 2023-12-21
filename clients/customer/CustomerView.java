@@ -76,17 +76,10 @@ public class CustomerView implements Observer
       e -> cont.doClear() );
     cp.add( theBtClear );                           //  Add to canvas
 
-    //reserve function
-    theBtReserve.setBounds( 16, 25+60*2, 80, 40 );    // reserve button
+    theBtReserve.setBounds( 16, 25+60*2, 80, 40 );    // Reserve button
     theBtReserve.addActionListener(                   // action
       e -> cont.doReserve() );
     cp.add( theBtReserve );   
-
-
-
-
-
-
 
     theAction.setBounds( 110, 25 , 270, 20 );       // Message area
     theAction.setText( "" );                        //  Blank
