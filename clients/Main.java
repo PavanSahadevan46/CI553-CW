@@ -14,6 +14,10 @@ import clients.customer.CustomerView;
 import clients.shopDisplay.DisplayController;
 import clients.shopDisplay.DisplayModel;
 import clients.shopDisplay.DisplayView;
+import clients.reservation.reservationClient;
+import clients.reservation.reservationController;
+import clients.reservation.reservationModel;
+import clients.reservation.reservationView;
 import clients.warehousePick.PickController;
 import clients.warehousePick.PickModel;
 import clients.warehousePick.PickView;
@@ -62,6 +66,7 @@ class Main
     if ( many ) 
       startDisplayGUI_MVC( mlf );
     startCollectionGUI_MVC( mlf );
+    startReservationGUI_MVC( mlf );
   }
   
   public void startCustomerGUI_MVC(MiddleFactory mlf )
@@ -169,6 +174,24 @@ class Main
 
     model.addObserver( view );       // Add observer to the model
     window.setVisible(true);         // Make window visible
+  }
+
+  public void startReservationGUI_MVC(MiddleFactory mlf){
+    JFrame window = new JFrame();
+
+    window.setTitle("View Reservations MVC");
+    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
+    Dimension pos = PosOnScrn.getPos();
+
+    reservationModel model = new reservationModel(mlf);
+    reservationView view = new reservationView(window, mlf, pos.width, pos.height, model);
+    reservationController cont = new reservationController(model, view);
+
+    view.setController(cont);
+
+    model.addObserver(view);
+    window.setVisible(true);         // Make window visible
+    
   }
 
 }

@@ -1,4 +1,5 @@
 package dbAccess;
+
 import catalogue.Product;
 import debug.DEBUG;
 import middle.ReserveReader;
@@ -18,61 +19,59 @@ public class reserveR implements ReserveReader
      * @throws reserveException if error
      */
     public reserveR()
-    throws reserveException
-    {          
-            try
-            {
-              DBAccess dbDriver = (new DBAccessFactory()).getNewDBAccess();
-              dbDriver.loadDriver();
-            
-              theCon  = DriverManager.getConnection
-                          ( dbDriver.urlOfDatabase(), 
-                            dbDriver.username(), 
-                            dbDriver.password() );
-        
-              theStmt = theCon.createStatement();
-              theCon.setAutoCommit( true );
-            }
-            catch ( SQLException e )
-            {
-              throw new reserveException( "SQL problem:" + e.getMessage() );
-            }
-            catch ( Exception e )
-            {
-              throw new reserveException("Can not load database driver.");
-            }
-        }
-        /**
-         * Returns a statement object that is used to process SQL statements
-         * @return A statement object used to access the database
-         */
-        
-        protected Statement getStatementObject()
-        {
-            return theStmt;
-        }
+    throws reserveException{   
+      try{
+        DBAccess dbDriver = (new DBAccessFactory()).getNewDBAccess();
+        dbDriver.loadDriver();
+      
+        theCon  = DriverManager.getConnection
+                    ( dbDriver.urlOfDatabase(), 
+                      dbDriver.username(), 
+                      dbDriver.password() );
 
-        /**
-         * Returns a connection object that is used to process
-         * requests to the DataBase
-         * @return a connection object
-         */
+        theStmt = theCon.createStatement();
+        theCon.setAutoCommit( true );
+      }
+      catch ( SQLException e )
+      {
+        throw new reserveException( "SQL problem:" + e.getMessage() );
+      }
+      catch ( Exception e )
+      {
+        throw new reserveException("Can not load database driver.");
+      }
+  }
+  /**
+   * Returns a statement object that is used to process SQL statements
+   * @return A statement object used to access the database
+   */
+  
+      protected Statement getStatementObject()
+      {
+          return theStmt;
+      }
 
-        protected Connection getConnectionObject()
-        {
-            return theCon;
-        }
-    
-    /**
-     * Checks if any rows exist to see if any reservations are made already 
-     * ReserveTable contains an auto incrementing id called ReserveID 
-     * 
-     * @param rID
-     * @return
-     * @throws reserveException
-     */
-    public synchronized boolean exists(String rID)
-                 throws reserveException
+      /**
+       * Returns a connection object that is used to process
+       * requests to the DataBase
+       * @return a connection object
+       */
+
+      protected Connection getConnectionObject()
+      {
+          return theCon;
+      }
+  
+  /**
+   * Checks if any rows exist to see if any reservations are made already 
+   * ReserveTable contains an auto incrementing id called ReserveID 
+   * 
+   * @param rID
+   * @return
+   * @throws reserveException
+   */
+  public synchronized boolean exists(String rID)
+                throws reserveException
   {
     
     try
