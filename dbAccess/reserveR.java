@@ -77,7 +77,7 @@ public class reserveR implements ReserveReader
     try
     {
       ResultSet rs   = getStatementObject().executeQuery(
-        "select COUNT(*) from ReserveTable"
+        "select * from ReserveTable"
        
       );
       boolean res = rs.next();
@@ -97,12 +97,12 @@ public class reserveR implements ReserveReader
     
     try {
       ResultSet rs =getStatementObject().executeQuery(
-        "SELECT T1.reserveID FROM ReserveTable T1 JOIN ReserveTable T2 ON T1.reserveID = T2.reserveID + 1");
+        "SELECT T1.reserveID FROM ReserveTable T1 JOIN ReserveTable T2 ON T1.reserveID = T2.reserveID + 1 ORDER BY T1.reserveID");
        // Iterate through the result set and print values
        while (rs.next()) {
         // int reserveID = rs.getInt("reserveID");
         globalReserveID = rs.getInt("reserveID");
-        System.out.println("ReserveID: " + globalReserveID);
+        // System.out.println("ReserveID: " + globalReserveID);
     }
     
       } catch (SQLException e) {

@@ -18,9 +18,7 @@ public class reservationController {
 
   }
 
-  public synchronized void loadTable(){
-    model.retrieveTableData();
-  }
+ 
 
 
 
