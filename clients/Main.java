@@ -23,9 +23,11 @@ import clients.warehousePick.PickModel;
 import clients.warehousePick.PickView;
 import middle.LocalMiddleFactory;
 import middle.MiddleFactory;
+import middle.reserveException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 
 /**
@@ -179,19 +181,22 @@ class Main
   public void startReservationGUI_MVC(MiddleFactory mlf){
     JFrame window = new JFrame();
 
-    window.setTitle("View Reservations MVC");
+    window.setTitle("View Reservations");
     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
     Dimension pos = PosOnScrn.getPos();
-
+  try{
     reservationModel model = new reservationModel(mlf);
     reservationView view = new reservationView(window, mlf, pos.width, pos.height, model);
     reservationController cont = new reservationController(model, view);
-
+  
     view.setController(cont);
 
     model.addObserver(view);
     window.setVisible(true);         // Make window visible
-    
+    }catch(reserveException e){
+      e.printStackTrace();
+      System.out.println("Error in ReservationModel :" + e);
+    }
   }
 
 }

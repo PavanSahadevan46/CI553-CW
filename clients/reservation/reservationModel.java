@@ -15,22 +15,19 @@ public class reservationModel  extends Observable  {
     
     private DefaultTableModel tableModel;
 
-    public reservationModel(MiddleFactory mlf) {
-    tableModel = new DefaultTableModel();
-    tableModel.addColumn("reserveID");
-    tableModel.addColumn("productNo");
-    tableModel.addColumn("Quantity");
-    }
-
     private Connection theCon    = null;      // Connection to database
     private Statement  theStmt   = null;      // Statement object
    /**
      * Connecting to database
      * @throws reserveException if error
      */
-    public reservationModel()
+    public reservationModel(MiddleFactory mlf)
     throws reserveException
-    {   
+    {    
+         tableModel = new DefaultTableModel();
+        tableModel.addColumn("reserveID");
+        tableModel.addColumn("productNo");
+        tableModel.addColumn("Quantity");
       try{
         DBAccess dbDriver = (new DBAccessFactory()).getNewDBAccess();
         dbDriver.loadDriver();
@@ -72,6 +69,8 @@ public class reservationModel  extends Observable  {
    {
        return theCon;
    }
+
+ 
 
     public synchronized ResultSet retrieveTableData()  {
         try{

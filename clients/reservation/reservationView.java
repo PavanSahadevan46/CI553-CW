@@ -39,7 +39,10 @@ public class reservationView extends JFrame implements Observer  {
         cp.add(scrollPane, BorderLayout.CENTER);
         
         JButton refreshButton = new JButton("Refresh");
-        refreshButton.addActionListener(e -> model.retrieveTableData());
+        refreshButton.addActionListener(e ->
+            model.retrieveTableData()
+        );
+       
         cp.add(refreshButton, BorderLayout.SOUTH);
     }
 
@@ -47,7 +50,7 @@ public class reservationView extends JFrame implements Observer  {
     @Override
     public void update(Observable o, Object arg) {
         table.setModel(model.getTableModel());
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        
     }
 
 
