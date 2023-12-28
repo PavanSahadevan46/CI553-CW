@@ -100,6 +100,7 @@ class Setup
     catch ( Exception e )
     {
         System.err.println("Can not load JDBC/ODBC driver.");
+        System.out.println(e);
         System.exit( -1 );
     }
 
