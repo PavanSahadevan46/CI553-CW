@@ -8,6 +8,8 @@ import middle.reserveException;
 
 import java.sql.*;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 public class reserveR implements ReserveReader
 {
     private Connection theCon    = null;      // Connection to database
@@ -63,31 +65,33 @@ public class reserveR implements ReserveReader
       }
   
   /**
-   * Checks if any rows exist to see if any reservations are made already 
+   * Checks the amount of reservations in the table  
    * ReserveTable contains an auto incrementing id called ReserveID 
    * 
-   * @param rID
+   * @param 
    * @return
    * @throws reserveException
    */
-  public synchronized boolean exists(String rID)
+  public synchronized int checkReservationCount()
                 throws reserveException
   {
-    
+    int count = 0;
     try
     {
       ResultSet rs   = getStatementObject().executeQuery(
-        "select * from ReserveTable"
-       
+        "SELECT COUNT(reserveID) AS count FROM ReserveTable"
       );
-      boolean res = rs.next();
-      DEBUG.trace( "DB StockR: exists(%s) -> %s", 
-                    rID, ( res ? "T" : "F" ) );
-      return res;
+      while(rs.next()){
+        count = rs.getInt("count");
+        }
+
+
+      return count;
     } catch ( SQLException e )
     {
       throw new reserveException( "SQL exists: " + e.getMessage() );
     }
+    
   }
 
 
@@ -97,12 +101,11 @@ public class reserveR implements ReserveReader
     
     try {
       ResultSet rs =getStatementObject().executeQuery(
-        "SELECT T1.reserveID FROM ReserveTable T1 JOIN ReserveTable T2 ON T1.reserveID = T2.reserveID + 1 ORDER BY T1.reserveID");
+        "SELECT reserveID FROM ReserveTable");
        // Iterate through the result set and print values
        while (rs.next()) {
-        // int reserveID = rs.getInt("reserveID");
         globalReserveID = rs.getInt("reserveID");
-        // System.out.println("ReserveID: " + globalReserveID);
+        System.out.println("ReserveID: " + globalReserveID);
     }
     
       } catch (SQLException e) {

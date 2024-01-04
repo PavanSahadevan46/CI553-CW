@@ -61,7 +61,7 @@ class Setup
   
   "drop table ReserveTable",
   "create table ReserveTable ("+
-      "reserveID  Integer NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 0, INCREMENT BY 1),"+
+      "reserveID  Integer NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),"+
       "productNo      Char(4)," +
       "Quantity      Char(3))",
 

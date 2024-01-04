@@ -127,6 +127,8 @@ public class CustomerModel extends Observable
       theReserve.reserveItem(pn,amount);
       theReserve.getReserveID();
       theAction = ("Your Reservation id is: " + String.valueOf(theReserve.getGlobalReserveID())); 
+      theReserve.checkReservationCount();
+      System.out.println("Amount of reservations is: " + theReserve.checkReservationCount());
       setChanged(); notifyObservers(theAction);
       };
     };
