@@ -1,12 +1,10 @@
 package dbAccess;
 
-import catalogue.Product;
-import debug.DEBUG;
 import middle.ReserveReader;
-import middle.StockException;
 import middle.reserveException;
 
 import java.sql.*;
+
 
 public class reserveR implements ReserveReader
 {
@@ -63,46 +61,54 @@ public class reserveR implements ReserveReader
       }
   
   /**
-   * Checks if any rows exist to see if any reservations are made already 
+   * Checks the amount of reservations in the table  
    * ReserveTable contains an auto incrementing id called ReserveID 
-   * 
-   * @param rID
-   * @return
+   * using count function returns the number of rows that matches reserveID
+   * @return returns count of reserveID 
    * @throws reserveException
    */
-  public synchronized boolean exists(String rID)
+  public synchronized int checkReservationCount()
                 throws reserveException
   {
-    
+    int count = 0; // var to store result of query
     try
     {
+      // sql query counts number of records in ReserveTable
       ResultSet rs   = getStatementObject().executeQuery(
-        "select * from ReserveTable"
-       
+        "SELECT COUNT(reserveID) AS count FROM ReserveTable"
       );
-      boolean res = rs.next();
-      DEBUG.trace( "DB StockR: exists(%s) -> %s", 
-                    rID, ( res ? "T" : "F" ) );
-      return res;
+      // iterate through result set and get count value
+      while(rs.next()){
+        count = rs.getInt("count");
+        }
+
+        // return the count value 
+      return count;
     } catch ( SQLException e )
     {
       throw new reserveException( "SQL exists: " + e.getMessage() );
     }
+    
   }
 
 
-   
+   // variable for getter to get reserve id
   int globalReserveID;
+
+  /** retrieves upcoming reserve id from ReserveTable and passes it to global getter
+   *@return returns result set containing the reserveID
+   *@throws SQLException if error with executing sql query
+   */
+
   public ResultSet getReserveID() throws SQLException  {
     
     try {
       ResultSet rs =getStatementObject().executeQuery(
-        "SELECT T1.reserveID FROM ReserveTable T1 JOIN ReserveTable T2 ON T1.reserveID = T2.reserveID + 1 ORDER BY T1.reserveID");
-       // Iterate through the result set and print values
+        "SELECT reserveID FROM ReserveTable");
+       // Iterate through the result set and update global getter var 
        while (rs.next()) {
-        // int reserveID = rs.getInt("reserveID");
         globalReserveID = rs.getInt("reserveID");
-        // System.out.println("ReserveID: " + globalReserveID);
+        System.out.println("ReserveID: " + globalReserveID);
     }
     
       } catch (SQLException e) {
@@ -110,6 +116,11 @@ public class reserveR implements ReserveReader
     }
     return null;
   }
+
+  /**getter for getting the next upcoming id
+   * 
+   * @return global reserveid
+   */
 
   public int getGlobalReserveID(){
     return globalReserveID;

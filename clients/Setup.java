@@ -59,17 +59,16 @@ class Setup
   "insert into StockTable values ( '0006',  15 )",
   "insert into StockTable values ( '0007',  01 )",
   
+  // table for reservations contains an autoincrementing reserveID and contains product number and quantity
   "drop table ReserveTable",
   "create table ReserveTable ("+
-      "reserveID  Integer NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 0, INCREMENT BY 1),"+
+      "reserveID  Integer NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),"+
       "productNo      Char(4)," +
       "Quantity      Char(3))",
 
    
   "select * from StockTable, ProductTable " +
           " where StockTable.productNo = ProductTable.productNo",
-
-//  "select * from ReserveTable",      
 
  };
 

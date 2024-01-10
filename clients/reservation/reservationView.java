@@ -1,23 +1,14 @@
 package clients.reservation;
 
 import middle.MiddleFactory;
-import middle.OrderException;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
-import java.util.List;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
 public class reservationView extends JFrame implements Observer  {
-    private static final long serialVersionUID = 1L;
-    private Font font = new Font("Monospaced",Font.BOLD,24);
     private int H = 300;         // Height of window 
     private int W = 400;         // Width  of window 
-    private String textToDisplay = "eeee";
     private reservationController cont = null;
     
     private reservationModel model;
@@ -34,26 +25,37 @@ public class reservationView extends JFrame implements Observer  {
         rootWindow.setLocation( x, y );                 // Position on screen
         rootWindow.setVisible( true );                 // Make visible
 
+        // create jtable 
         table = new JTable(model.getTableModel());
+        // create a scroll bar
         JScrollPane scrollPane = new JScrollPane(table);
         cp.add(scrollPane, BorderLayout.CENTER);
         
+        // add a refresh button that calls the retrieveTableData() method to update the table's rows
         JButton refreshButton = new JButton("Refresh");
         refreshButton.addActionListener(e ->
             model.retrieveTableData()
         );
-       
+       // add the refresh button
         cp.add(refreshButton, BorderLayout.SOUTH);
     }
 
 
+  /**
+   * Update the view
+   * @param modelC   The observed model
+   * @param arg      Specific args 
+   */
     @Override
     public void update(Observable o, Object arg) {
         table.setModel(model.getTableModel());
         
     }
 
-
+    /**
+    * The controller object, used so that an interaction can be passed to the controller
+    * @param c   The controller
+    */
     public void setController(reservationController c) {
         cont = c;
     }
