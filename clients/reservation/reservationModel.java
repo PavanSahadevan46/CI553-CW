@@ -13,7 +13,7 @@ import middle.reserveException;
 
 public class reservationModel  extends Observable  {
     
-    private DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;     // creating instance of DefaultTableModel which is from swing
 
     private Connection theCon    = null;      // Connection to database
     private Statement  theStmt   = null;      // Statement object
@@ -24,7 +24,7 @@ public class reservationModel  extends Observable  {
     public reservationModel(MiddleFactory mlf)
     throws reserveException
     {    
-         tableModel = new DefaultTableModel();
+        tableModel = new DefaultTableModel();
         tableModel.addColumn("reserveID");
         tableModel.addColumn("productNo");
         tableModel.addColumn("Quantity");
@@ -71,33 +71,44 @@ public class reservationModel  extends Observable  {
    }
 
  
+/**
+ * retrieves data from the ReserveTable table and updates the default table model
+ * @return A ResultSet containing the retrieved data (currently always null).
+ */
 
-    public synchronized ResultSet retrieveTableData()  {
-        try{
-            ResultSet rs =getStatementObject().executeQuery( "SELECT * FROM ReserveTable");
-        
-            //clear existing data 
-            tableModel.setRowCount(0);
-        
-            //populate table with data from ReserveTable
-            while (rs.next()) {
-                Object[] row = new Object[3];
-                row[0] = rs.getObject(1);
-                row[1] = rs.getObject(2);
-                row[2] = rs.getObject(3);
-                tableModel.addRow(row);
-            }    
-            
-            setChanged();
-            notifyObservers();
-        }catch(SQLException e){
-            e.printStackTrace();
-        } 
-        return null; 
-    }  
-  
-    public DefaultTableModel getTableModel() {
-        return tableModel;
-    }
+  public synchronized ResultSet retrieveTableData()  {
+      try{
+          // execute sql query to get all records from reservetable
+          ResultSet rs =getStatementObject().executeQuery( "SELECT * FROM ReserveTable"); // 
+      
+          //clear existing data 
+          tableModel.setRowCount(0);
+      
+          //while loop to populate the tablemodel
+          while (rs.next()) {
+              Object[] row = new Object[3];
+              row[0] = rs.getObject(1);
+              row[1] = rs.getObject(2);
+              row[2] = rs.getObject(3);
+
+              // add row to tablemodel
+              tableModel.addRow(row);
+          }    
+          // notify observers of change
+          setChanged();
+          notifyObservers();
+      }catch(SQLException e){
+          e.printStackTrace();
+      } 
+      return null; 
+  }  
+
+  /**
+   * retrieve instanse used to store table data
+   * @return instance of default table model
+   */
+  public DefaultTableModel getTableModel() {
+      return tableModel;
+  }
 
 }

@@ -14,7 +14,6 @@ import clients.customer.CustomerView;
 import clients.shopDisplay.DisplayController;
 import clients.shopDisplay.DisplayModel;
 import clients.shopDisplay.DisplayView;
-import clients.reservation.reservationClient;
 import clients.reservation.reservationController;
 import clients.reservation.reservationModel;
 import clients.reservation.reservationView;
@@ -27,7 +26,6 @@ import middle.reserveException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
 
 
 /**
@@ -68,7 +66,7 @@ class Main
     if ( many ) 
       startDisplayGUI_MVC( mlf );
     startCollectionGUI_MVC( mlf );
-    startReservationGUI_MVC( mlf );
+    startReservationGUI_MVC( mlf ); //  start reservation gui 
   }
   
   public void startCustomerGUI_MVC(MiddleFactory mlf )
@@ -178,22 +176,24 @@ class Main
     window.setVisible(true);         // Make window visible
   }
 
+  // reservation gui
   public void startReservationGUI_MVC(MiddleFactory mlf){
     JFrame window = new JFrame();
 
     window.setTitle("View Reservations");
     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
     Dimension pos = PosOnScrn.getPos();
-  try{
+    
+  try{ // intialising MVC architecture
     reservationModel model = new reservationModel(mlf);
     reservationView view = new reservationView(window, mlf, pos.width, pos.height, model);
     reservationController cont = new reservationController(model, view);
   
     view.setController(cont);
 
-    model.addObserver(view);
+    model.addObserver(view);           // Add observer
     window.setVisible(true);         // Make window visible
-    }catch(reserveException e){
+    }catch(reserveException e){ // needs to catch exception as in model sql queries are handled
       e.printStackTrace();
       System.out.println("Error in ReservationModel :" + e);
     }

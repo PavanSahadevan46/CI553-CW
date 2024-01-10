@@ -2,12 +2,10 @@ package catalogue;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.Comparator;
 
 /**
- * Write a description of class BetterBasket here.
  * checks existing products and increments the quantity if an additional product is added of the same type
- * sorts using collections util 
+ * sorts using collections  
  * @author  Pavan Sahadevan
  * @version 1.0
  */

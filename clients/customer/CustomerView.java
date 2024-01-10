@@ -1,7 +1,5 @@
 package clients.customer;
 
-import catalogue.Basket;
-import catalogue.BetterBasket;
 import clients.Picture;
 import middle.MiddleFactory;
 import middle.StockReader;
@@ -35,7 +33,7 @@ public class CustomerView implements Observer
   private final JScrollPane theSP      = new JScrollPane();
   private final JButton     theBtCheck = new JButton( Name.CHECK );
   private final JButton     theBtClear = new JButton( Name.CLEAR );
-  private final JButton     theBtReserve = new JButton( Name.RESERVE );
+  private final JButton     theBtReserve = new JButton( Name.RESERVE ); // the reserve button
 
   private Picture thePicture = new Picture(80,80);
   private StockReader theStock   = null;
@@ -78,8 +76,8 @@ public class CustomerView implements Observer
 
     theBtReserve.setBounds( 16, 25+60*2, 80, 40 );    // Reserve button
     theBtReserve.addActionListener(                   // action
-      e -> cont.doReserve() );
-    cp.add( theBtReserve );   
+      e -> cont.doReserve() ); // call back code
+    cp.add( theBtReserve );   // add to canvas
 
     theAction.setBounds( 110, 25 , 270, 20 );       // Message area
     theAction.setText( "" );                        //  Blank

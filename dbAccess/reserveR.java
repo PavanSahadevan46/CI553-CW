@@ -1,14 +1,10 @@
 package dbAccess;
 
-import catalogue.Product;
-import debug.DEBUG;
 import middle.ReserveReader;
-import middle.StockException;
 import middle.reserveException;
 
 import java.sql.*;
 
-import javax.naming.spi.DirStateFactory.Result;
 
 public class reserveR implements ReserveReader
 {
@@ -67,25 +63,26 @@ public class reserveR implements ReserveReader
   /**
    * Checks the amount of reservations in the table  
    * ReserveTable contains an auto incrementing id called ReserveID 
-   * 
-   * @param 
-   * @return
+   * using count function returns the number of rows that matches reserveID
+   * @return returns count of reserveID 
    * @throws reserveException
    */
   public synchronized int checkReservationCount()
                 throws reserveException
   {
-    int count = 0;
+    int count = 0; // var to store result of query
     try
     {
+      // sql query counts number of records in ReserveTable
       ResultSet rs   = getStatementObject().executeQuery(
         "SELECT COUNT(reserveID) AS count FROM ReserveTable"
       );
+      // iterate through result set and get count value
       while(rs.next()){
         count = rs.getInt("count");
         }
 
-
+        // return the count value 
       return count;
     } catch ( SQLException e )
     {
@@ -95,14 +92,20 @@ public class reserveR implements ReserveReader
   }
 
 
-   
+   // variable for getter to get reserve id
   int globalReserveID;
+
+  /** retrieves upcoming reserve id from ReserveTable and passes it to global getter
+   *@return returns result set containing the reserveID
+   *@throws SQLException if error with executing sql query
+   */
+
   public ResultSet getReserveID() throws SQLException  {
     
     try {
       ResultSet rs =getStatementObject().executeQuery(
         "SELECT reserveID FROM ReserveTable");
-       // Iterate through the result set and print values
+       // Iterate through the result set and update global getter var 
        while (rs.next()) {
         globalReserveID = rs.getInt("reserveID");
         System.out.println("ReserveID: " + globalReserveID);
@@ -113,6 +116,11 @@ public class reserveR implements ReserveReader
     }
     return null;
   }
+
+  /**getter for getting the next upcoming id
+   * 
+   * @return global reserveid
+   */
 
   public int getGlobalReserveID(){
     return globalReserveID;
