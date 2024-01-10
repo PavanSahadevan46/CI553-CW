@@ -193,8 +193,8 @@ public class CashierModel extends Observable
   }
 
   /**
-   * return an instance of a new Basket
-   * @return an instance of a new Basket
+   * return an instance of  BetterBasket
+   * @return an instance of a new BetterBasket
    */
   protected BetterBasket makeBasket()
   {

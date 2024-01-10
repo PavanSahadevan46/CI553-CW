@@ -23,7 +23,7 @@ public class CustomerModel extends Observable
   private String      pn = "";                    // Product being processed
   private Product      pr = null;                    // Product being processed 
  
-  private ReserveReadWriter theReserve = null;
+  private ReserveReadWriter theReserve = null; //  creating object of reserve read writer 
 
   private StockReader     theStock     = null;
   private StockReadWriter theStockRW     = null;
@@ -115,20 +115,22 @@ public class CustomerModel extends Observable
   
   public void doReserve()
   {
-    int    amount  = 1;   
-    String theAction = "";
+    int    amount  = 1;   // amount to decrement stock by
+    String theAction = ""; // product currently being processed 
+    
+    // if stock exists of entered product number
     try { 
       if ( theStock.exists( pn ) )
       {
-      Product pr = theStock.getDetails( pn );
-      if ( pr.getQuantity() >= amount ) 
+      Product pr = theStock.getDetails( pn ); // get desciription of product
+      if ( pr.getQuantity() >= amount ) // check if quantity is greater than 1
       {
-      theStockRW.buyStock(pn,amount);
-      theReserve.reserveItem(pn,amount);
-      theReserve.getReserveID();
-      theAction = ("Your Reservation id is: " + String.valueOf(theReserve.getGlobalReserveID())); 
-      theReserve.checkReservationCount();
-      System.out.println("Amount of reservations is: " + theReserve.checkReservationCount());
+      theStockRW.buyStock(pn,amount); // decrement 1 from stock of product
+      theReserve.reserveItem(pn,amount); // reserve item with the product number and amount
+      theReserve.getReserveID(); // call to get reservationid
+      theAction = ("Your Reservation id is: " + String.valueOf(theReserve.getGlobalReserveID())); // updating text area to give user back their id
+      theReserve.checkReservationCount(); // used for staff to see total amount of reservationss
+      System.out.println("Amount of reservations is: " + theReserve.checkReservationCount()); 
       setChanged(); notifyObservers(theAction);
       };
     };

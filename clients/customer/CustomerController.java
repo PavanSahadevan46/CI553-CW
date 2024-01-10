@@ -40,6 +40,10 @@ public class CustomerController
     model.doClear();
   }
   
+  /**
+   * Perform the reservation feature
+   */
+
   public void doReserve()
   {
     model.doReserve();
