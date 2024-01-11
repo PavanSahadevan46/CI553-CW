@@ -13,8 +13,11 @@ public class reserveRW  extends reserveR implements ReserveReadWriter{
     }
 
     /**
-     *  
-     * 
+     * reserves the specified quantity of an item identified by its product number
+     *
+     * @param pNum    the product number of the item to be reserved
+     * @param amount  the quantity of the item to be reserved
+     * @throws reserveException if an error occurs during the reservation process
      */
     public synchronized void reserveItem(String pNum, int amount)
     throws reserveException{
