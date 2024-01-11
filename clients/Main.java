@@ -186,7 +186,7 @@ class Main
     
   try{ // intialising MVC architecture
     reservationModel model = new reservationModel(mlf);
-    reservationView view = new reservationView(window, mlf, pos.width, pos.height, model);
+    reservationView view = new reservationView(window, pos.width, pos.height, model);
     reservationController cont = new reservationController(model, view);
   
     view.setController(cont);
