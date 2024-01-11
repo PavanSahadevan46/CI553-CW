@@ -100,7 +100,7 @@ public class reserveR implements ReserveReader
    *@throws SQLException if error with executing sql query
    */
 
-  public ResultSet getReserveID() throws SQLException  {
+  public  synchronized ResultSet getReserveID() throws SQLException  {
     
     try {
       ResultSet rs =getStatementObject().executeQuery(
