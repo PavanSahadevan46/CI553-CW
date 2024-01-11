@@ -14,7 +14,7 @@ public class reservationView extends JFrame implements Observer  {
     private reservationModel model;
     private JTable table;
 
-    public reservationView(RootPaneContainer rpc, MiddleFactory mf, int x, int y , reservationModel model){
+    public reservationView(RootPaneContainer rpc,int x, int y , reservationModel model){
         this.model = model;
         model.addObserver(this);
 
